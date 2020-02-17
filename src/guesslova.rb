@@ -70,7 +70,7 @@ end
 
 def main()
 
-	#file_path = ARGV[0]
+	from_row_number = ARGV[0].chomp.to_i
 	file_path = "../words-and-sentences.csv"
 	separator = "\t"
 	user_input = ""
@@ -79,6 +79,8 @@ def main()
 
 	dictionary = getCSVContent(file_path, separator)
 	
+	dictionary = dictionary[from_row_number..dictionary.length]
+
 	# https://ruby-doc.org/core-2.2.0/Interrupt.html
 	begin
 
