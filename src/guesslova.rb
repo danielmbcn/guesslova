@@ -68,12 +68,27 @@ def askExit()
 	end
 end
 
+def askNextStep()
+	puts "\n\n1. Press A to ask the word later again.\n2. Press Enter to continue. \n3. Press Q to exit."
+	user_input = STDIN.gets.chomp
+
+	# Quit the program
+	if user_input == "Q"
+		puts "\e[H\e[2J"
+		exit(true)
+	end
+
+	return user_input
+
+end
+
 def main()
 
 	from_row_number = ARGV[0].chomp.to_i
 	file_path = "../words-and-sentences.csv"
 	separator = "\t"
 	user_input = ""
+	next_step = ""
 
 	entries_already_asked = []
 
@@ -96,9 +111,13 @@ def main()
 			meaning = random_entry[0]
 
 			askEntryToUser(word, gender, meaning)
-			askExit()
 
-			entries_already_asked.insert(0, random_entry)
+			next_step = askNextStep()
+
+			# Unless the user presses A, the word won't be asked again.
+			unless next_step == "A"
+				entries_already_asked.insert(0, random_entry)
+			end
 
 			# In case that we've asked all the words, 'restart' the program.
 			if entries_already_asked.length == dictionary.length
@@ -126,6 +145,5 @@ Future features:
 
 - Option to ask the English name and the user to input the Czech part
 - If the Czech plural and singular are the same, make it explicit when asking it to the user (example: "ovoce" is the same in singular and in plural. Therefore, ask for "ovoce (singular)" or "ovoce (plural)")
-
 
 =end
