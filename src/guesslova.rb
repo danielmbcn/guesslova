@@ -17,6 +17,7 @@ def getCSVContent(csv_path, separator)
 	return content
 end
 
+
 # It returns a 1D array: [word, gender, meaning]
 def getRandomEntryFromDict(dictionary)
 
@@ -35,6 +36,7 @@ def getRandomEntryFromDict(dictionary)
 	return random_entry
 end
 
+
 def askEntryToUser(word, gender, meaning)
 
 	#Code color: 220 = yellow
@@ -42,31 +44,12 @@ def askEntryToUser(word, gender, meaning)
 	restore_to_default_color = "\e[0m"
 
 	puts start_code_color + word + "\n\nGender: " + gender +  restore_to_default_color
-
-	# Undefined genders are represented by "-" in the CSV, and no need to ask those.
-	
-	#if gender != "-"
-	if 1 == 2
-		printf "\nGender: "
-		user_input = STDIN.gets.chomp
-		puts "\n#{gender}"
-	end
 	
 	printf "\nMeaning: "
 	user_input = STDIN.gets.chomp
 	puts "\n#{meaning}"
 end
 
-#Ask the user whether he wants to quit the program.
-def askExit()
-	puts "\n\nPress Enter to continue or Q to exit."
-	user_input = STDIN.gets.chomp
-
-	if user_input == "Q"
-		puts "\e[H\e[2J"
-		exit(true)
-	end
-end
 
 def askNextStep()
 	puts "\n\n1. Press A to ask the word later again.\n2. Press Enter to continue. \n3. Press Q to exit."
@@ -82,6 +65,7 @@ def askNextStep()
 
 end
 
+
 def main()
 
 	from_row_number = ARGV[0].chomp.to_i
@@ -91,9 +75,7 @@ def main()
 	next_step = ""
 
 	entries_already_asked = []
-
 	dictionary = getCSVContent(file_path, separator)
-	
 	dictionary = dictionary[from_row_number..dictionary.length]
 
 	# https://ruby-doc.org/core-2.2.0/Interrupt.html
@@ -139,11 +121,7 @@ main()
 
 =begin
 
-V0.2
-
 Future features:
-
 - Option to ask the English name and the user to input the Czech part
-- If the Czech plural and singular are the same, make it explicit when asking it to the user (example: "ovoce" is the same in singular and in plural. Therefore, ask for "ovoce (singular)" or "ovoce (plural)")
 
 =end
