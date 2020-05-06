@@ -52,7 +52,11 @@ end
 
 
 def askNextStep()
-	puts "\n\n1. Press A to ask the word later again.\n2. Press Enter to continue. \n3. Press Q to exit."
+
+	puts "\n\n1. Press A to ask the word later again.
+			\n2. Press Enter to continue.
+			\n3. Press Q to exit."
+
 	user_input = STDIN.gets.chomp
 
 	# Quit the program
@@ -62,7 +66,6 @@ def askNextStep()
 	end
 
 	return user_input
-
 end
 
 
